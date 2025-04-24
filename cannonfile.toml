@@ -1,0 +1,18 @@
+name = "test-contracts"
+description = "Contract for testing different solidity abi types"
+version = "0.0.1"
+preset = "types-tester"
+
+[var.main]
+admin = "0xca111279D6aeEc39849ed5CD2bA3045381643422"
+salt = "test-contracts"
+
+[deploy.TypesTester]
+artifact = "TypesTester"
+
+[diamond.Diamond]
+contracts = ["TypesTester"]
+diamondArgs.owner = "<%= settings.admin %>"
+salt = "<%= settings.salt %>"
+highlight = true
+immutable = false
