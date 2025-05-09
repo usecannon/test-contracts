@@ -263,4 +263,12 @@ contract TypesTester {
         );
         return nestedArray[outerIndex][innerIndex];
     }
+
+    // ———————————————————————————————————————————————
+    // Native token transfer function
+    function sendNativeToken(address payable _to) external payable {
+        // Transfer the native token (ETH) to the specified address
+        (bool success, ) = _to.call{value: msg.value}("");
+        require(success, "Transfer failed");
+    }
 }
