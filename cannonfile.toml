@@ -1,6 +1,6 @@
 name = "test-contracts"
 description = "Contract for testing different solidity abi types"
-version = "0.0.1"
+version = "0.0.2"
 preset = "types-tester"
 
 [var.main]
