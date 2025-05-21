@@ -45,8 +45,39 @@ contract TypesTester {
         address c;
     }
 
+    // ———————————————————————————————————————————————
+    // Custom Tuple types (Structs) as requested
+    struct MyTuple {
+        uint256 id;
+        string name; // A string member for the tuple
+    }
+
+    struct NestedTuple {
+        MyTuple innerTuple; // A nested MyTuple instance
+        address owner; // An address associated with this nested tuple
+        uint256 referenceId; // A numeric ID for reference
+    }
+
+    struct NestedTupleWithArray {
+        MyTuple recordInfo; // A nested MyTuple instance for information
+        uint256[] dataPoints; // An array of numbers
+        MyTuple[] tupleData; // An array of MyTuple
+        bool isActive; // A status flag
+        string category; // A category descriptor
+    }
+
     SimpleStruct public testSimpleStruct;
     SimpleStruct[] public simpleArray;
+
+    // State variables for Custom Tuple types
+    MyTuple public myTupleInstance;
+    MyTuple[] public myTupleArray;
+
+    NestedTuple public nestedTupleInstance;
+    NestedTuple[] public nestedTupleArray;
+
+    NestedTupleWithArray public nestedTupleWithArrayInstance;
+    NestedTupleWithArray[] public nestedTupleWithArrayArray;
 
     // ———————————————————————————————————————————————
     // Array of mappings
@@ -262,6 +293,82 @@ contract TypesTester {
             "Inner index out of bounds"
         );
         return nestedArray[outerIndex][innerIndex];
+    }
+
+    // ———————————————————————————————————————————————
+    // Custom Tuple types (Structs) functions
+
+    function setMyTuple(MyTuple calldata _v) external {
+        myTupleInstance = _v;
+    }
+
+    function echoMyTuple(
+        MyTuple calldata _v
+    ) external pure returns (MyTuple memory) {
+        return _v;
+    }
+
+    function setMyTupleArray(MyTuple[] calldata _v) external {
+        delete myTupleArray;
+        for (uint i = 0; i < _v.length; i++) {
+            myTupleArray.push(_v[i]);
+        }
+    }
+
+    function echoMyTupleArray(
+        MyTuple[] calldata _v
+    ) external pure returns (MyTuple[] memory) {
+        return _v;
+    }
+
+    function setNestedTuple(NestedTuple calldata _v) external {
+        nestedTupleInstance = _v;
+    }
+
+    function echoNestedTuple(
+        NestedTuple calldata _v
+    ) external pure returns (NestedTuple memory) {
+        return _v;
+    }
+
+    function setNestedTupleArray(NestedTuple[] calldata _v) external {
+        delete nestedTupleArray;
+        for (uint i = 0; i < _v.length; i++) {
+            nestedTupleArray.push(_v[i]);
+        }
+    }
+
+    function echoNestedTupleArray(
+        NestedTuple[] calldata _v
+    ) external pure returns (NestedTuple[] memory) {
+        return _v;
+    }
+
+    function setNestedTupleWithArray(
+        NestedTupleWithArray calldata _v
+    ) external {
+        nestedTupleWithArrayInstance = _v;
+    }
+
+    function echoNestedTupleWithArray(
+        NestedTupleWithArray calldata _v
+    ) external pure returns (NestedTupleWithArray memory) {
+        return _v;
+    }
+
+    function setNestedTupleWithArrayArray(
+        NestedTupleWithArray[] calldata _v
+    ) external {
+        delete nestedTupleWithArrayArray;
+        for (uint i = 0; i < _v.length; i++) {
+            nestedTupleWithArrayArray.push(_v[i]);
+        }
+    }
+
+    function echoNestedTupleWithArrayArray(
+        NestedTupleWithArray[] calldata _v
+    ) external pure returns (NestedTupleWithArray[] memory) {
+        return _v;
     }
 
     // ———————————————————————————————————————————————
